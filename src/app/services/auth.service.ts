@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError,throwError } from 'rxjs';
+import { User } from '../models/user/user.module';
 interface AuthResponse {
   user_name: string,
   password: string,
@@ -19,7 +20,9 @@ export class AuthService {
       user_name: user_name,
       password: password,
       full_name: full_name,
-    })
+    }).pipe(
+      catchError(this.handleError)
+    )
   }
   login(user_name: string, password: string) {
     return this.http.post<AuthResponse>(this.url + "auth/login", {
@@ -30,7 +33,7 @@ export class AuthService {
     )
   }
   private handleError(err: HttpErrorResponse) {
-    let message = "hata oluştu";
-    return throwError(() => message);
+    return throwError(() => err.error.message);
   }
+
 }
