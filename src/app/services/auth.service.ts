@@ -1,12 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError,throwError } from 'rxjs';
-import { User } from '../models/user/user.module';
 interface AuthResponse {
   user_name: string,
   password: string,
   full_name: string,
   role: string,
+  token:string
 }
 @Injectable({
   providedIn: 'root'
@@ -36,4 +36,9 @@ export class AuthService {
     return throwError(() => err.error.message);
   }
 
+  public isAuthenticated():boolean{
+    if(localStorage.getItem("token")) return true
+    return false
+  }
+ 
 }

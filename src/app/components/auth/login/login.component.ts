@@ -11,42 +11,11 @@ export class LoginComponent {
   constructor(private authService: AuthService,private formBuilder: FormBuilder) { }
   isLoginMode: boolean = false;
   error: string | null = null
-  // handleAuth(form: NgForm) {
-  //   if (!form.valid) {
-  //     return;
-  //   }
-  //   console.log(form.value);
-  //   localStorage.setItem("user", JSON.stringify(form.value))
-  //   const user_name = form.value.user_name;
-  //   const password = form.value.password;
-  //   if (this.isLoginMode) {
-  //     console.log("login mode....");
-  //   } else {
-  //     try {
-  //       this.authService.login(user_name, password)
-  //         .subscribe({
-  //           next: (response) => {
-  //             console.log(response);
-  //             localStorage.setItem("user", form.value)
-
-  //           },
-  //           error: (err) => {
-  //             this.error = err
-  //             console.log(err);
-  //           }
-  //         })
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-
-  // }
   form: FormGroup = new FormGroup({
     user_name: new FormControl(''),
     password: new FormControl(''),
   });
   submitted = false;
-
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
@@ -91,6 +60,7 @@ export class LoginComponent {
         this.authService.login(user_name, password)
         .subscribe({
           next:(response) => {
+            localStorage.setItem("token",response.token)
             console.log(response);
           },
           error:(err)=>{
