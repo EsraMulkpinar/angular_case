@@ -1,6 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map } from 'rxjs';
 import { User } from '../models/user/user.module';
 
 interface UserResponse {

@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError,tap,throwError } from 'rxjs';
-import {Observable} from "rxjs"
+import { catchError, throwError } from 'rxjs';
 interface AuthResponse {
   user_name: string,
   password: string,

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RoleGuardService } from 'src/app/services/role-guard.service';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { Observable } from 'rxjs';
+import { RoleGuardService } from 'src/app/services/role-guard.service';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
