@@ -16,7 +16,6 @@ export class AuthService {
   url = "http://localhost:3000/"
   error=null
   user:any
-  isAdmin:Observable<boolean>=Observable.create(false)
   constructor(private http: HttpClient) {
     http.options(this.url,{headers:{token:localStorage.getItem("token")||""}})
    }

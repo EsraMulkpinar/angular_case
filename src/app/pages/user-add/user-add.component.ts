@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import {ActivatedRoute,Router} from "@angular/router"
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/models/user/user.module';
 @Component({
   selector: 'app-user-add',
   templateUrl: './user-add.component.html',
@@ -38,6 +37,7 @@ export class UserAddComponent {
               Validators.maxLength(40),
             ],
           ],
+          role:[false]
         },
         
       );

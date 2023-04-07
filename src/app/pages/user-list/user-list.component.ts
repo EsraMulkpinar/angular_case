@@ -2,31 +2,30 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleGuardService } from 'src/app/services/role-guard.service';
-import decode from "jwt-decode"
 import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
 })
 export class UserListComponent {
-  constructor(private userService: UserService,private authService:AuthService,private route: ActivatedRoute,private router: Router,public role:RoleGuardService) {}
+  users: any;
+  constructor(private userService: UserService,private authService:AuthService
+    ,private router: Router,public role:RoleGuardService) {
+      this.role=role
 
+    }
   ngOnInit(): void {
     this.getUser()
-    this.authService.isAdmin.subscribe((value) => {
-      this.isAdmin=value
+    this.role.isAuthorized.subscribe((v) => {
+      console.log(v);
+      console.log(this.role);
     })
   }
-  isAdmin:boolean=false
-  users: any;
-  id: any;
 
   getUser() {
     this.userService.getUser().subscribe((response) => {
       this.users = response
-      if(response.role="admin"){
-        this.isAdmin=true
-      }
     })
   }
   

@@ -13,6 +13,7 @@ export class UserDetailsComponent {
 
   user:User|null=null
   roleCheck:boolean|null=null
+  error:string|null=null
   ngOnInit(): void {
   this.getUserByID()
    this.form = this.formBuilder.group(
@@ -33,9 +34,8 @@ export class UserDetailsComponent {
             Validators.maxLength(40),
           ],
         ],
-        role:[
-          '',
-        ]
+        role:[false]
+
       },
       
     );
@@ -90,11 +90,18 @@ export class UserDetailsComponent {
   updateUser(){
     this.form.setValue({...this.form.value,role:this.roleCheck?"admin":"user"})
     this.route.params.subscribe((params) => {
-      return this.userService.updateUser(params["id"],this.form.value).subscribe((response) => {
-        console.log(response);
-        
+      return this.userService.updateUser(params["id"],this.form.value)
+      .subscribe({
+        next:(response) => {
+          console.log(response);
+          this.router.navigate(["/user"])
+        },
+        error:(err)=>{
+          this.error=err.error.message
+          console.log(err.error.message);
+        }
       })
-    })
+      })
   }
  
 }
