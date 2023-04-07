@@ -1,0 +1,72 @@
+<div class="flex justify-center h-full items-center">
+  <form [formGroup]="form"  class="flex flex-col justify-evenly items-start w-full md:w-1/2 min-h-[450px]   p-5 bg-gray-900 rounded-xl text-white " (ngSubmit)="onSubmit(form)">
+    <div class="mx-5 text-lg font-medium">User Add </div>
+    
+    <div class="form-group flex flex-col w-full">
+      <label  class="mx-5 text-lg font-medium">Username</label>
+      <input
+      formControlName="user_name"
+        type="text"
+        class="form-control  mx-5  p-4 rounded-xl text-black"
+        [ngClass]="{ 'is-invalid': submitted && f['user_name'].errors }"
+      />
+      <div  
+      *ngIf="submitted && f['user_name'].errors" class="invalid-feedback"
+      class="bg-red-100 border  border-red-400 text-red-700 px-4 py-3 mx-5 rounded relative "
+      role="alert">
+      <strong  *ngIf="f['user_name'].errors['required']" class="font-bold  ">Username is required</strong>
+      <strong *ngIf="f['user_name'].errors['minlength']" class="font-bold  ">Username must be at least 6 characters</strong>
+      <strong *ngIf="f['user_name'].errors['maxlength']" class="font-bold  ">Username must not exceed 20 characters</strong>
+    </div>
+    </div>
+    <div class="form-group flex flex-col w-full">
+      <label  class="mx-5 text-lg font-medium">Full Name</label>
+      <input
+        type="text"
+        formControlName="full_name"
+        class="form-control  mx-5  p-4 rounded-xl text-black"
+        [ngClass]="{ 'is-invalid': submitted && f['full_name'].errors }"
+
+      />
+      <div 
+      *ngIf="submitted && f['full_name'].errors" class="invalid-feedback"
+      class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mx-5 rounded relative "
+      role="alert">
+      <strong *ngIf="f['full_name'].errors['required']" class="font-bold  ">Full Name is required</strong>
+      <strong *ngIf="f['full_name'].errors['minlength']" class="font-bold  ">Full Name must be at least 6 characters</strong>
+      <strong *ngIf="f['full_name'].errors['maxlength']" class="font-bold  ">Full Name must not exceed 20 characters</strong>
+    </div>
+    </div>
+    <div class="form-group flex flex-col w-full ">
+      <label  class="mx-5 text-lg font-medium">Password</label>
+      <input
+        type="text"
+        formControlName="password"
+        class="form-control mx-5  p-4 rounded-xl text-black"
+        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+      />
+      <div 
+        *ngIf="submitted && f['password'].errors" class="invalid-feedback"
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mx-5 rounded relative "
+        role="alert">
+        <strong *ngIf="f['password'].errors['required']" class="font-bold  ">Password is required</strong>
+        <strong *ngIf="f['password'].errors['minlength']" class="font-bold  ">Password must be at least 6 characters</strong>
+        <strong *ngIf="f['password'].errors['maxlength']" class="font-bold  ">Password must not exceed 20 characters</strong>
+      </div>
+       
+    </div>
+  
+    <div class="form-group mx-5">
+      <label  class="mx-2 text-lg font-medium">Role</label>
+      <input
+      [(ngModel)]="roleCheck"
+        type="checkbox"
+        formControlName="role"
+        class="form-control text-lg font-medium"
+      />
+    </div>
+      <div class="mx-5">
+        <button class="bg-green-700 w-36 h-16 rounded-xl" type="submit">Add</button>
+      </div>
+  </form>
+</div>

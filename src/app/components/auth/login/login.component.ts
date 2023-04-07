@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import Validation from '../validation';
-
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  constructor(private authService: AuthService,private formBuilder: FormBuilder) { }
-  isLoginMode: boolean = false;
+  constructor(private authService: AuthService,private formBuilder: FormBuilder,private router:Router) { }
+  public isLoginMode: boolean = false;
   error: string | null = null
   form: FormGroup = new FormGroup({
     user_name: new FormControl(''),
@@ -46,11 +45,9 @@ export class LoginComponent {
   }
   onSubmit() {
     this.submitted = true;
-
     if (this.form.invalid) {
       return;
     }
-    
     const user_name = this.form.value.user_name;
     const password = this.form.value.password;
     if(this.isLoginMode) {
@@ -62,6 +59,7 @@ export class LoginComponent {
           next:(response) => {
             localStorage.setItem("token",response.token)
             console.log(response);
+            this.router.navigate(["/user"])
           },
           error:(err)=>{
             this.error=err
@@ -75,7 +73,7 @@ export class LoginComponent {
     }
   
   }
-  loginMode() {
+   loginMode() {
     this.isLoginMode = !this.isLoginMode;
   }
 }

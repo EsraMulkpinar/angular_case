@@ -1,8 +1,8 @@
 import { Component, OnInit,  } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { User } from 'src/app/models/user/user.module';
 import { AuthService } from 'src/app/services/auth.service';
 import Validation from '../validation';
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-register',
@@ -10,7 +10,7 @@ import Validation from '../validation';
 })
 export class RegisterComponent  implements OnInit{
   
-  constructor(private authService: AuthService,private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService,private formBuilder: FormBuilder,private router:Router) {
 
    }
   
@@ -76,6 +76,7 @@ export class RegisterComponent  implements OnInit{
         .subscribe({
           next:(response) => {
             console.log(response);
+            this.router.navigate(["/login"])
           },
           error:(err)=>{
             this.error=err

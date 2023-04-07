@@ -1,0 +1,55 @@
+<div class="flex justify-center h-full items-center ">
+  <form [formGroup]="form" *ngIf="user" class="flex flex-col justify-evenly items-start w-full md:w-1/2 min-h-[400px] bg-gray-900 rounded-xl text-white " (ngSubmit)="onSubmit(form)">
+    <div class="mx-5 text-lg font-medium">User ID : {{user.id}}</div>
+   <div class="form-group flex flex-col w-full">
+     <label  class=" mx-5 text-lg font-medium">Username</label>
+     <input
+     formControlName="user_name"
+       type="text"
+       class="form-control text-black mx-5 p-4 rounded-xl "
+       [ngClass]="{ 'is-invalid': submitted && f['user_name'].errors }"
+
+     />
+     <div 
+        *ngIf="submitted && f['user_name'].errors" class="invalid-feedback"
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mx-2 rounded relative "
+        role="alert">
+        <strong *ngIf="f['user_name'].errors['required']" class="font-bold  ">Username is required</strong>
+        <strong *ngIf="f['user_name'].errors['minlength']" class="font-bold  ">Username must be at least 6 characters</strong>
+        <strong *ngIf="f['user_name'].errors['maxlength']" class="font-bold  ">Username must not exceed 20 characters</strong>
+      </div>
+   </div>
+   <div class="form-group flex flex-col w-full">
+     <label  class="mx-5 text-lg font-medium">Full Name</label>
+     <input
+       type="text"
+       formControlName="full_name"
+       class="form-control mx-5 p-4 rounded-xl text-black"
+       [ngClass]="{ 'is-invalid': submitted && f['full_name'].errors }"
+
+     />
+     <div 
+     *ngIf="submitted && f['full_name'].errors" class="invalid-feedback"
+     class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 mx-2 rounded relative "
+     role="alert">
+     <strong *ngIf="f['full_name'].errors['required']" class="font-bold  ">Full Name is required</strong>
+     <strong *ngIf="f['full_name'].errors['minlength']" class="font-bold  ">Full Name must be at least 6 characters</strong>
+     <strong *ngIf="f['full_name'].errors['maxlength']" class="font-bold  ">Full Name must not exceed 20 characters</strong>
+   </div>
+   </div>
+   <div class="form-group">
+     <label  class="mx-5 text-lg font-medium">Role</label>
+     <input
+     [(ngModel)]="roleCheck"
+       type="checkbox"
+       formControlName="role"
+       class="form-control rounded-md  text-black"
+       
+     />
+   </div>
+    <div class="flex mx-5 space-x-5 ">
+      <button routerLink="/user" class="bg-green-700 w-36 h-16 rounded-xl" (click)="updateUser()" type="submit">Edit</button>
+      <button routerLink="/user" class="bg-red-600 w-36 h-16 rounded-xl" (click)="deleteUser()">Delete</button>
+    </div>
+ </form>
+</div>

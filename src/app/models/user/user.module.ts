@@ -1,7 +1,8 @@
 
 export class User{
   id?:string;
-  username?:string;
+  user_name?:string;
+  full_name?:string;
   password?: string;
   role?:string;
   token?: string;

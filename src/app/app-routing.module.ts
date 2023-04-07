@@ -8,6 +8,8 @@ import { AuthGuard
 } from './services/auth-guard.service';
 import { RoleGuardService } from './services/role-guard.service';
 import { UserListComponent } from './pages/user-list/user-list.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
+import { UserAddComponent } from './pages/user-add/user-add.component';
 
 const routes: Routes = [
   {path:"register",component:RegisterComponent},
@@ -15,11 +17,25 @@ const routes: Routes = [
   { 
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard] 
   },
   { 
-    path: 'userList',
+    path: 'user',
     component: UserListComponent,
+    canActivate: [AuthGuard],
+    
+  },
+ 
+  { 
+    path: 'user/:id',
+    component: UserDetailsComponent,
+    canActivate: [RoleGuardService],
+    data:{
+      expectedRole:"admin"
+    }
+  },
+  { 
+    path: 'add',
+    component: UserAddComponent,
     canActivate: [RoleGuardService],
     data:{
       expectedRole:"admin"

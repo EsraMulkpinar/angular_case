@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import {Router} from  "@angular/router"
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: 'app-header',
+  templateUrl: './header.component.html',
 })
-export class HomeComponent {
+export class HeaderComponent {
+
   constructor(private authService:AuthService,private router:Router){
   }
   logout(){

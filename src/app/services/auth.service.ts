@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError,throwError } from 'rxjs';
+import { catchError,tap,throwError } from 'rxjs';
+import {Observable} from "rxjs"
 interface AuthResponse {
   user_name: string,
   password: string,
@@ -14,7 +15,11 @@ interface AuthResponse {
 export class AuthService {
   url = "http://localhost:3000/"
   error=null
-  constructor(private http: HttpClient) { }
+  user:any
+  isAdmin:Observable<boolean>=Observable.create(false)
+  constructor(private http: HttpClient) {
+    http.options(this.url,{headers:{token:localStorage.getItem("token")||""}})
+   }
   register(user_name: string, password: string, full_name: string) {
     return this.http.post<AuthResponse>(this.url + "auth/register", {
       user_name: user_name,
@@ -31,6 +36,10 @@ export class AuthService {
     }).pipe(
       catchError(this.handleError)
     )
+  }
+
+  logout(){
+    return this.http.get<AuthResponse>(this.url+"auth/logout")
   }
   private handleError(err: HttpErrorResponse) {
     return throwError(() => err.error.message);

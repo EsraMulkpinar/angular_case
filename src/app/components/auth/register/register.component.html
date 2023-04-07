@@ -1,5 +1,5 @@
-<div class="flex justify-center mt-20 items-center">
-  <div class="bg-blue-100 p-10 md:w-1/2 w-full rounded-xl">
+<div class="flex justify-center h-full items-center">
+  <div class="bg-gray-900 text-white p-10 md:w-1/2 w-full rounded-xl">
     <div class="text-xl mx-2 font-bold">Kayıt Ol</div>
     <div *ngIf="error"
     class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
@@ -7,13 +7,13 @@
     <strong class="font-bold">{{ error }}</strong>
   </div>
   <div class="register-form">
-    <form  [formGroup]="form" class="flex flex-col min-h-[300px] justify-around" (ngSubmit)="onSubmit()">
+    <form  [formGroup]="form" class="flex flex-col min-h-[400px] justify-around" (ngSubmit)="onSubmit()">
       <div class="form-group flex flex-col">
         <label  class="mx-2 text-lg font-medium">Username</label>
         <input
           type="text"
           formControlName="user_name"
-          class="form-control p-2 rounded-md mx-2"
+          class="form-control p-2 rounded-md mx-2 text-black"
           [ngClass]="{ 'is-invalid': submitted && f['user_name'].errors }"
         />
         <div 
@@ -30,7 +30,7 @@
         <input
           type="text"
           formControlName="full_name"
-          class="form-control p-2 rounded-md mx-2"
+          class="form-control p-2 rounded-md mx-2 text-black"
           [ngClass]="{ 'is-invalid': submitted && f['full_name'].errors }"
         />
         <div
@@ -47,7 +47,7 @@
         <input
           type="password"
           formControlName="password"
-          class="form-control p-2 rounded-md mx-2"
+          class="form-control p-2 rounded-md mx-2 text-black"
           [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
         />
         <div 
@@ -65,7 +65,7 @@
         <input
           type="password"
           formControlName="confirmPassword"
-          class="form-control p-2 rounded-md mx-2"
+          class="form-control p-2 rounded-md mx-2 text-black"
           [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
         />
         <div 

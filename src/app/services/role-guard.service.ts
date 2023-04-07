@@ -9,6 +9,8 @@ import decode from 'jwt-decode';
 @Injectable({providedIn:"root"})
 export class RoleGuardService implements CanActivate {
   constructor(public auth: AuthService, public router: Router) {}
+  public isAdmin:boolean=false
+
   canActivate(route: ActivatedRouteSnapshot): boolean {
     // this will be passed from the route config
     // on the data property
@@ -23,6 +25,13 @@ export class RoleGuardService implements CanActivate {
       tokenPayload.role !== expectedRole
     ) {
       this.router.navigate(['/login']);
+      if(tokenPayload.role==="admin"){
+        this.isAdmin=true
+      }
+      else{
+        this.isAdmin=false
+      }
+      
       return false;
     }
     }
